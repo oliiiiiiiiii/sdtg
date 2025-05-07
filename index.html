@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infix 表達式轉換可視化</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Infix 表達式轉換可視化</h1>
+    
+    <div class="container">
+        <div class="input-section">
+            <input type="text" id="infixInput" placeholder="輸入 infix 表達式 (例如: 3+4*2/(1-5))">
+            <button id="prefixBtn">轉換為 Prefix</button>
+            <button id="postfixBtn">轉換為 Postfix</button>
+        </div>
+                
+        <div class="step-controls">
+            <button id="prevStepBtn">上一步</button>
+            <button id="nextStepBtn">下一步</button>
+            <button id="playBtn">自動播放</button>
+            <button id="resetBtn">重置</button>
+        </div>
+        
+        <div class="explanation" id="explanationBox">
+            <!-- 步驟解釋會顯示在這裡 -->
+            請輸入一個 infix 表達式並選擇要轉換為 prefix 或 postfix。
+        </div>
+        
+        <div class="input-display" id="inputDisplay">
+            <!-- 這裡顯示輸入的表達式 -->
+        </div>
+        
+        <div class="visualization-section">
+            <div class="column">
+                <h2>操作堆疊 (Stack)</h2>
+                <div class="stack-container" id="stackContainer">
+                    <!-- 堆疊元素會在這裡動態添加 -->
+                </div>
+            </div>
+            
+            <div class="column">
+                <h2>輸出</h2>
+                <div class="output-container" id="outputContainer">
+                    <!-- 輸出元素會在這裡動態添加 -->
+                </div>
+                <div class="output-display" id="outputDisplay">
+                    <!-- 最終輸出會顯示在這裡 -->
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>轉換結果</h2>
+            <div>
+                <p><strong>Prefix 表達式:</strong> <span id="prefixResult">-</span></p>
+                <p><strong>Postfix 表達式:</strong> <span id="postfixResult">-</span></p>
+                <p><strong>計算結果:</strong> <span id="evaluationResult">-</span></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
