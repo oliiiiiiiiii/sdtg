@@ -39,8 +39,15 @@ function tokenize(infix) {
     return tokens;
 }
 
+function check(value1, value2, rev){
+  if(rev == 0)
+    return (precedence(value1) >= precedence(value2));
+  else 
+    return (precedence(value1) > precedence(value2));
+}
+
 // 轉換為 postfix 的步驟記錄
-function infixToPostfixSteps(tokens) {
+function infixToPostfixSteps(tokens, rev) {
     const steps = [];
     const stack = [];
     const output = [];
@@ -129,7 +136,7 @@ function infixToPostfixSteps(tokens) {
             while (
                 stack.length > 0 &&
                 stack[stack.length - 1].value !== '(' &&
-                precedence(stack[stack.length - 1].value) >= precedence(token.value)
+                check(stack[stack.length-1].value, token.value, rev)
             ) {
                 const popped = stack.pop();
                 output.push(popped);
@@ -195,7 +202,7 @@ function infixToPrefixSteps(infix) {
     });
 
     // 用 postfix algorithm 套用在 reversed tokens
-    const { steps: postfixSteps, output: postfixOutput } = infixToPostfixSteps(reversedTokens);
+    const { steps: postfixSteps, output: postfixOutput } = infixToPostfixSteps(reversedTokens, 1);
 
     const prefixSteps = [
         {
@@ -426,7 +433,7 @@ function handlePostfixConversion() {
     inputDisplay.innerHTML = `Infix: ${infix}`;
     
     const tokens = tokenize(infix);
-    const { steps, output } = infixToPostfixSteps(tokens);
+    const { steps, output } = infixToPostfixSteps(tokens, 0);
     
     currentSteps = steps;
     currentStepIndex = 0;
