@@ -343,9 +343,9 @@ document.addEventListener('DOMContentLoaded', function () {
         usageContent.innerHTML = `
             <h3>How to Use the Converter:</h3>
             <ol>
-                <li>Enter an infix expression (e.g., 3+4*2/(1-5))</li>
-                <li>Click "Convert to Prefix" or "Convert to Postfix"</li>
-                <li>Step through or auto-play the conversion process</li>
+                <li>Enter an infix expression.</li>
+                <li>Click "CONVERT TO PREFIX" or "CONVERT TO POSTFIX".</li>
+                <li>Click "NEXT STEP" step through or click "AUTO PLAY" to auto-play the conversion process.</li>
             </ol>
             <h3>Supported Operators:</h3>
             <ul>
