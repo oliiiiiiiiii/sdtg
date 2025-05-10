@@ -61,7 +61,7 @@ function infixToPostfixSteps(tokens, rev) {
                 token: token,
                 stack: [...stack],
                 output: [...output],
-                explanation: `讀取數字 ${token.value}，直接加入輸出`
+                explanation: `Read the number ${token.value} and add it directly to the output.`
             });
             
             output.push(token);
@@ -71,7 +71,7 @@ function infixToPostfixSteps(tokens, rev) {
                 token: token,
                 stack: [...stack],
                 output: [...output],
-                explanation: `將數字 ${token.value} 加入輸出`
+                explanation: `Add the number ${token.value} to the output.`
             });
         } else if (token.value === '(') {
             steps.push({
@@ -79,7 +79,7 @@ function infixToPostfixSteps(tokens, rev) {
                 token: token,
                 stack: [...stack],
                 output: [...output],
-                explanation: `讀取左括號 '('，放入堆疊`
+                explanation: `Read the left parenthesis '(', push it onto the stack.`
             });
             
             stack.push(token);
@@ -89,7 +89,7 @@ function infixToPostfixSteps(tokens, rev) {
                 token: token,
                 stack: [...stack],
                 output: [...output],
-                explanation: `將左括號 '(' 放入堆疊`
+                explanation: `Push the left parenthesis '(' onto the stack.`
             });
         } else if (token.value === ')') {
             steps.push({
@@ -97,7 +97,7 @@ function infixToPostfixSteps(tokens, rev) {
                 token: token,
                 stack: [...stack],
                 output: [...output],
-                explanation: `讀取右括號 ')'，開始彈出堆疊直到找到對應的左括號`
+                explanation: `Read the right parenthesis ')', start popping from the stack until the matching left parenthesis is found.`
             });
             
             while (stack.length > 0 && stack[stack.length - 1].value !== '(') {
@@ -109,7 +109,7 @@ function infixToPostfixSteps(tokens, rev) {
                     token: popped,
                     stack: [...stack],
                     output: [...output],
-                    explanation: `彈出運算符 '${popped.value}' 並加入輸出`
+                    explanation: `Pop the operator '${popped.value}' and add it to the output.`
                 });
             }
             
@@ -121,7 +121,7 @@ function infixToPostfixSteps(tokens, rev) {
                     token: leftParen,
                     stack: [...stack],
                     output: [...output],
-                    explanation: `彈出左括號 '(' 並丟棄它`
+                    explanation: `Pop the left parenthesis '(' and discard it.`
                 });
             }
         } else if (isOperator(token.value)) {
@@ -130,7 +130,7 @@ function infixToPostfixSteps(tokens, rev) {
                 token: token,
                 stack: [...stack],
                 output: [...output],
-                explanation: `讀取運算符 '${token.value}'`
+                explanation: `Read the operator '${token.value}'`
             });
             
             while (
@@ -146,7 +146,7 @@ function infixToPostfixSteps(tokens, rev) {
                     token: popped,
                     stack: [...stack],
                     output: [...output],
-                    explanation: `彈出優先級更高或相同的運算符 '${popped.value}' 並加入輸出`
+                    explanation: `Pop operators with higher or equal precedence (in this case, '${popped.value}') and add them to the output.`
                 });
             }
             
@@ -157,7 +157,7 @@ function infixToPostfixSteps(tokens, rev) {
                 token: token,
                 stack: [...stack],
                 output: [...output],
-                explanation: `將運算符 '${token.value}' 放入堆疊`
+                explanation: `Push the operator '${token.value}' onto the stack.`
             });
         }
     }
@@ -171,7 +171,7 @@ function infixToPostfixSteps(tokens, rev) {
             token: popped,
             stack: [...stack],
             output: [...output],
-            explanation: `彈出剩餘的運算符 '${popped.value}' 並加入輸出`
+            explanation: `Pop the remaining operator '${popped.value}' and add it to the output.`
         });
     }
     
@@ -179,7 +179,7 @@ function infixToPostfixSteps(tokens, rev) {
         action: 'complete',
         stack: [],
         output: [...output],
-        explanation: `轉換完成！`
+        explanation: `Conversion complete!`
     });
     
     return { steps, output };
@@ -207,13 +207,13 @@ function infixToPrefixSteps(infix) {
     const prefixSteps = [
         {
             action: 'init',
-            explanation: `首先，我們反轉 token 並交換括號`
+            explanation: `First, we reverse the tokens and swap the parentheses.`
         },
         ...postfixSteps,
         {
             action: 'reverse',
             output: [...postfixOutput].reverse(),
-            explanation: `最後，我們反轉 postfix 輸出來獲得 prefix 表達式`
+            explanation: `Finally, we reverse the postfix output to obtain the prefix expression.`
         }
     ];
 
@@ -370,7 +370,7 @@ function prevStep() {
 // 開始自動播放
 function startAnimation() {
     stopAnimation(); // 先停止之前的動畫
-    playBtn.textContent = '暫停';
+    playBtn.textContent = 'Pause';
     animationInterval = setInterval(() => {
         if (currentStepIndex < currentSteps.length - 1) {
             nextStep();
@@ -384,7 +384,7 @@ function startAnimation() {
 function stopAnimation() {
     clearInterval(animationInterval);
     animationInterval = null;  // <- 加上這一行！
-    playBtn.textContent = '自動播放';
+    playBtn.textContent = 'Auto Play';
 }
 
 
@@ -394,7 +394,7 @@ function resetVisualization() {
     stopAnimation();
     
     // 確保播放按鈕顯示為「自動播放」
-    playBtn.textContent = '自動播放';
+    playBtn.textContent = 'Auto Play';
     
     // 清空輸入框
     infixInput.value = '';
@@ -413,7 +413,7 @@ function resetVisualization() {
     outputDisplay.textContent = '';
     
     // 重置說明和步驟
-    explanationBox.textContent = '請輸入一個 infix 表達式並選擇要轉換為 prefix 或 postfix。';
+    explanationBox.textContent = 'Please enter an infix expression and choose whether to convert it to prefix or postfix.';
     currentSteps = [];
     currentStepIndex = 0;
     
@@ -426,7 +426,7 @@ function resetVisualization() {
 function handlePostfixConversion() {
     const infix = infixInput.value.trim();
     if (!infix) {
-        alert('請輸入 infix 表達式');
+        alert('Please enter an infix expression.');
         return;
     }
     
@@ -446,7 +446,7 @@ function handlePostfixConversion() {
         const value = evaluatePostfix(output);
         evaluationResult.textContent = value;
     } catch (err) {
-        evaluationResult.textContent = '計算錯誤';
+        evaluationResult.textContent = 'Calculation Error';
     }
     
     // 計算並顯示 prefix 結果
@@ -462,7 +462,7 @@ function handlePostfixConversion() {
 function handlePrefixConversion() {
     const infix = infixInput.value.trim();
     if (!infix) {
-        alert('請輸入 infix 表達式');
+        alert('Please enter an infix expression.');
         return;
     }
     
@@ -486,7 +486,7 @@ function handlePrefixConversion() {
         const value = evaluatePostfix(postfixOutput);
         evaluationResult.textContent = value;
     } catch (err) {
-        evaluationResult.textContent = '計算錯誤';
+        evaluationResult.textContent = 'Calculation Error';
     }
     
     // 重置到第一步並顯示
