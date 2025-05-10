@@ -420,6 +420,9 @@ function resetVisualization() {
     // 禁用步驟按鈕
     prevStepBtn.disabled = true;
     nextStepBtn.disabled = true;
+
+    prefixBtn.disabled = false;
+    postfixBtn.disabled = false;
 }
 
 // 處理轉換為 postfix
@@ -455,6 +458,8 @@ function handlePostfixConversion() {
     
     // 重置到第一步並顯示
     currentStepIndex = 0;
+    prefixBtn.disabled = true;
+    postfixBtn.disabled = true;
     displayStep(currentStepIndex);
 }
 
@@ -491,6 +496,8 @@ function handlePrefixConversion() {
     
     // 重置到第一步並顯示
     currentStepIndex = 0;
+    prefixBtn.disabled = true;
+    postfixBtn.disabled = true;
     displayStep(currentStepIndex);
 }
 
