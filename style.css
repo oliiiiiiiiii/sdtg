@@ -389,3 +389,57 @@ button:disabled {
     margin-top: 10px;
   }
 }
+
+.fade-in-bg {
+    animation: fadeInBackground 0.4s ease forwards;
+}
+
+@keyframes fadeInBackground {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Modal 彈窗進場動畫 */
+.scale-in-center {
+    animation: scaleInCenter 0.4s ease forwards;
+}
+
+@keyframes scaleInCenter {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Modal 淡出背景 */
+.fade-out-bg {
+    animation: fadeOutBackground 0.3s ease forwards;
+}
+
+@keyframes fadeOutBackground {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Modal 縮回動畫 */
+.scale-out-center {
+    animation: scaleOutCenter 0.3s ease forwards;
+}
+
+@keyframes scaleOutCenter {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+}

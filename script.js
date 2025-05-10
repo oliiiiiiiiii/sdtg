@@ -325,9 +325,11 @@ document.addEventListener('DOMContentLoaded', function () {
     usageButton.addEventListener('click', function () {
         const modal = document.createElement('div');
         modal.style.cssText = `position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.7);z-index:1000;display:flex;justify-content:center;align-items:center;`;
+        modal.classList.add('fade-in-bg');
 
         const modalContent = document.createElement('div');
         modalContent.style.cssText = `background:white;border:3px solid #2c3e50;box-shadow:8px 8px 0 #ff5555;padding:30px;max-width:600px;width:80%;max-height:80%;overflow:auto;position:relative;`;
+        modalContent.classList.add('scale-in-center');
 
         const closeBtn = document.createElement('button');
         closeBtn.textContent = 'X';
@@ -359,7 +361,25 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.appendChild(modalContent);
         document.body.appendChild(modal);
 
-        closeBtn.onclick = () => modal.remove();
-        modal.onclick = e => { if (e.target === modal) modal.remove(); };
+        closeBtn.onclick = () => {
+            modal.classList.remove('fade-in-bg');
+            modal.classList.add('fade-out-bg');
+        
+            modalContent.classList.remove('scale-in-center');
+            modalContent.classList.add('scale-out-center');
+        
+            setTimeout(() => {
+                modal.remove();
+            }, 300); // 等動畫跑完才 remove
+        };        
+        modal.onclick = e => {
+            if (e.target === modal) {
+                modal.classList.remove('fade-in-bg');
+                modal.classList.add('fade-out-bg');
+                modalContent.classList.remove('scale-in-center');
+                modalContent.classList.add('scale-out-center');
+                setTimeout(() => modal.remove(), 300);
+            }
+        };        
     });
 });
